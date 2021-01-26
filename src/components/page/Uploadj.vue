@@ -60,17 +60,7 @@
       <div class="upload" v-show="uploadshow2">
         <span class="closeupload" @click="closeupload"><i class="el-icon-close"></i></span>
         <p class="title">上传密文转明文</p><br>
-        <el-upload
-            class="upload-demo"
-            drag
-            action="http://119.23.48.180:8088/api/v1/uploadmd"
-            :on-error="uploagerror"
-            :on-success="handleAvatarSuccess"
-            >
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <!-- <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div> -->
-        </el-upload>
+        
   </div>
 
     </div>
