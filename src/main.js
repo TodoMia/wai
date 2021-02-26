@@ -14,8 +14,9 @@ import axios from 'axios'
 // axios.defaults.timeout = 6000;
 import { Message,Loading  } from 'element-ui';
 
-// axios.defaults.baseURL= `http://192.168.3.100:10085/api/v1`;
-axios.defaults.baseURL= `http://119.23.48.180:8088/api/v1`;
+axios.defaults.baseURL= `http://192.168.3.100:10085/api/v1`;
+// axios.defaults.baseURL= `http://119.23.48.180:8088/api/v1`;
+// axios.defaults.baseURL= `http://192.168.3.100:10082/Login/api/vi`;
 
 // 配置发送信息
 axios.interceptors.request.use(function(config){
