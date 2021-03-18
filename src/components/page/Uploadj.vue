@@ -42,26 +42,22 @@
          layout="total, prev, pager, next" :total="totals">
       </el-pagination>
 
-      <div class="upload" v-show="uploadshow">
-            <span class="closeupload" @click="closeupload"><i class="el-icon-close"></i></span>
-            <p class="title">上传明文转密文</p><br>
-            <el-upload
-                class="upload-demo"
-                drag
-                action="http://192.168.3.100:10085/api/v1/uploadph"
-                :on-error="uploagerror"
-                :on-success="handleAvatarSuccess"
-                >
-                <i class="el-icon-upload"></i>
-                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                <!-- <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div> -->
-            </el-upload>
-      </div>
+
       <div class="upload" v-show="uploadshow2">
         <span class="closeupload" @click="closeupload"><i class="el-icon-close"></i></span>
         <p class="title">上传密文转明文</p><br>
-        
-  </div>
+        <el-upload
+            class="upload-demo"
+            drag
+            action="/api/v1/uploadmd"
+            :on-error="uploagerror"
+            :on-success="handleAvatarSuccess"
+            >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <!-- <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div> -->
+        </el-upload>
+     </div>
 
     </div>
 </template>
@@ -166,7 +162,7 @@ export default {
                 "endtime": endtime
             }
             console.log(postdata)
-            const url="/findmtp"
+            const url="/api/v1/findmtp"
             this.$http.post(url,postdata)
 			.then(res => {
                 console.log(res)
@@ -196,11 +192,11 @@ export default {
             res=row
             res.type ='1'
             console.log(res)
-            const url="/phoneexport"
+            const url="/api/v1/phoneexport"
             this.$http.post(url,res,{responseType: 'blob'})
 			.then(res => {
                 console.log(res)
-                console.log(res.data)
+                console.log(res.data.filename)
                 console.log(res.config.data)
                 
                 const blob = res.data;
@@ -214,7 +210,7 @@ export default {
                 console.log(fname.filename)
                 // a.download = "明文"+fname.filename;
                 // a.download = "明文"+fname.filename;
-				a.download = "明文"+`.xls`;
+				a.download = fname.filename;
 				a.href = e.target.result;
 				document.body.appendChild(a);
 				a.click();

@@ -48,7 +48,7 @@
             <el-upload
                 class="upload-demo"
                 drag
-                action="http://119.23.48.180:8088/api/v1/uploadph"
+                action="/api/v1/uploadph"
                 :on-error="uploagerror"
                 :on-success="handleAvatarSuccess"
                 >
@@ -57,21 +57,7 @@
                 <!-- <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div> -->
             </el-upload>
       </div>
-      <div class="upload" v-show="uploadshow2">
-        <span class="closeupload" @click="closeupload"><i class="el-icon-close"></i></span>
-        <p class="title">上传密文转明文</p><br>
-        <el-upload
-            class="upload-demo"
-            drag
-            action="http://192.168.3.100:10085/api/v1/uploadmd"
-            :on-error="uploagerror"
-            :on-success="handleAvatarSuccess"
-            >
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <!-- <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div> -->
-        </el-upload>
-     </div>
+
 
     </div>
 </template>
@@ -176,7 +162,7 @@ export default {
                 "endtime": endtime
             }
             console.log(postdata)
-            const url="/findptm"
+            const url="/api/v1/findptm"
             this.$http.post(url,postdata)
 			.then(res => {
                 console.log(res)
@@ -206,7 +192,7 @@ export default {
             res=row
             res.type ='1'
             console.log(res)
-            const url="/md5export"
+            const url="/api/v1/md5export"
             this.$http.post(url,res,{responseType: 'blob'})
 			.then(res => {
                 console.log(res)
@@ -220,8 +206,8 @@ export default {
 				const a = document.createElement('a');
                 var fname=JSON.parse(res.config.data)
                 console.log(fname.filename)
-                // a.download = fname.filename;
-                a.download = "密文"+`.xls`;
+                a.download = fname.filename;
+                // a.download = "密文"+`.txt`;
                 // a.download = "md5"+fname.filename;
 				a.href = e.target.result;
 				document.body.appendChild(a);

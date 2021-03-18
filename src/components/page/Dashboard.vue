@@ -12,6 +12,7 @@
             <div>
                 <span class="chaxun" @click="chaxun">查询</span>
                 <span class="chaxun" @click="upload">上传</span>
+                
             </div>
         </div>
         <el-table v-loading="loading" :data="tableData" style="width: 100%; height: 100%">
@@ -51,7 +52,7 @@
             <el-upload
                 class="upload-demo"
                 drag
-                action="http://119.23.48.180:8088/api/v1/uploadbd"
+                action="/api/v1/uploadbd" 
                 :on-error="uploagerror"
                 :on-success="handleAvatarSuccess"
                 >
@@ -97,6 +98,7 @@ export default {
         this.chaxun()
     },
     methods: {
+        
         chaxun(){
             this.end=this.pagesize
             this.currentPage1=1;
@@ -165,8 +167,7 @@ export default {
                 "endtime": endtime
             }
             console.log(postdata)
-            const url="/findimformationbyshortid"
-            
+            const url="/api/v1/findimformationbyshortid"
             this.$http.post(url,postdata)
 			.then(res => {
                 console.log(res)
@@ -189,7 +190,7 @@ export default {
             res=row
             res.type ='1'
             console.log(res)
-            const url="/export"
+            const url="/api/v1/export"
             this.$http.post(url,res,{responseType: 'blob'})
 			.then(res => {
                 console.log(res)
@@ -204,9 +205,9 @@ export default {
                 // const name = (new Date()).getFullYear()+""+((new Date()).getMonth()+1)+""+(new Date()).getDate()+"-"+(new Date()).getHours()+"_"+(new Date()).getMinutes();
                 var fname=JSON.parse(res.config.data)
                 console.log(fname.filename)
-                // a.download = fname.filename;
+                a.download = fname.filename;
                 // a.download = "可营销"+fname.filename;
-                a.download = "可营销"+`.xls`;
+                // a.download = "可营销"+`.xls`;
 
 				// 后端设置的文件名称在res.headers的 "content-disposition": "form-data; name=\"attachment\"; filename=\"20181211191944.zip\"",
 				a.href = e.target.result;
@@ -225,7 +226,7 @@ export default {
             res=row
             res.type ='2'
             console.log(res)
-            const url="/export"
+            const url="/api/v1/export"
             this.$http.post(url,res,{responseType: 'blob'})
 			.then(res => {
                 console.log(res)
@@ -253,8 +254,6 @@ export default {
             })
         },
         deletClick(row){
-            
-
             this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
@@ -263,7 +262,7 @@ export default {
                 var res={}
                 res=row
                 console.log(res)
-                const url="/deleteyqhfile"
+                const url="/api/v1/deleteyqhfile"
                 this.$http.post(url,res,)
                 .then(res => {
                     console.log(res)

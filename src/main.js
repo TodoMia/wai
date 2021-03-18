@@ -2,8 +2,6 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import ElementUI from 'element-ui';
-import VueI18n from 'vue-i18n';
-import { messages } from './components/common/i18n';
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import './assets/css/theme-green/index.css'; // 浅绿色主题
 import './assets/css/icon.css';
@@ -14,9 +12,8 @@ import axios from 'axios'
 // axios.defaults.timeout = 6000;
 import { Message,Loading  } from 'element-ui';
 
-axios.defaults.baseURL= `http://192.168.3.100:10085/api/v1`;
-// axios.defaults.baseURL= `http://119.23.48.180:8088/api/v1`;
-// axios.defaults.baseURL= `http://192.168.3.100:10082/Login/api/vi`;
+// axios.defaults.baseURL= `http://192.168.3.185:10085`;
+axios.defaults.baseURL= `http://119.23.48.180:8088/`;
 
 // 配置发送信息
 axios.interceptors.request.use(function(config){
@@ -41,13 +38,8 @@ axios.interceptors.response.use(function(response){
 Vue.prototype.$http=axios
 
 Vue.config.productionTip = false;
-Vue.use(VueI18n);
 Vue.use(ElementUI, {
     size: 'small'
-});
-const i18n = new VueI18n({
-    locale: 'zh',
-    messages
 });
 
 
@@ -74,6 +66,5 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
     router,
-    i18n,
     render: h => h(App)
 }).$mount('#app');

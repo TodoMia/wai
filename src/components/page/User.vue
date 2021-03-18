@@ -8,13 +8,16 @@
                         <div class="user-info-cont">
                             <div class="user-info-name">{{name}}</div>
                             <div>{{role}}</div>
+                            <!-- <span class="chaxun" @click="deleteall">一键清理</span> -->
+                        </div>
+                        <div class="user-info-cont">
+                            <el-button type="primary" class="chaxun" @click="deleteall">一键清库</el-button>
                         </div>
                         <div class="xiugai" @click="changepsd">修改密码</div>
                     </div>
                 </el-card>
             </el-col>
         </el-row>
-
         <el-dialog v-loading="loading"  title="修改密码" :visible.sync="dialogFormVisible">
             <div class="changepwd">
                 <el-input type="password" placeholder="原始密码" v-model="pwd1" @blur="pwdyz">
@@ -73,6 +76,33 @@ export default {
         }
     },
     methods: {
+        deleteall(){
+            this.$confirm('此操作将永久删除所有文件, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                const url="/api/v1/deletemd5andphone"
+                this.$http.post(url)
+                .then(res => {
+                    if(res.status == '200'){
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success',
+                        });
+                        this.chaxun()
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
+        },
         changepsd(){
             this.dialogFormVisible = true
         },
