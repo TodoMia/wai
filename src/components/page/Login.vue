@@ -47,7 +47,7 @@ export default {
 				username: this.param.username,
 				password: this.param.password,
 			  }
-			  this.$http.post('/login',postdata)
+			  this.$http.post('/api/v1/login',postdata)
 			  .then((res)=>{
                   console.log(res)
 				if (res.data.code == '200') {

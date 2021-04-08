@@ -130,7 +130,7 @@ export default {
 				username: users.username,
 				newpwd: this.pwd3,
 			  }
-			  this.$http.post('/updatepwd',postdata)
+			  this.$http.post('/api/v1/updatepwd',postdata)
 			  .then((res)=>{
                 this.loading=false;
                   console.log(res)
